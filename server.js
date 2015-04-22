@@ -118,7 +118,16 @@ io.on("connection", function(socket){
 
 });
 
-//Start the http server at port and IP defined before
+//Start the server on OpenShift
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var ipaddr = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
+http.listen(port, ipaddr, function () {
+  console.log( "Listening on " + ipaddr + ", port " + port )
+});
+
+/*Start the http server at port and IP defined before
 http.listen(app.get("port"), app.get("ipaddr"), function() {
   console.log("Server up and running. Go to http://" + app.get("ipaddr") + ":" + app.get("port"));
 });
+*/
